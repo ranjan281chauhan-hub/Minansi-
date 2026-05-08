@@ -101,12 +101,30 @@
     <p class="instruction">Click a button to see a memory! 📸✨</p>
 
     <div class="button-grid">
-        <button class="cute-btn btn-1">Memory 1</button>
-        <button class="cute-btn btn-2">Memory 2</button>
-        <button class="cute-btn btn-3">Memory 3</button>
-        <button class="cute-btn btn-4">Memory 4</button>
-        <button class="cute-btn btn-5">Memory 5</button>
+        <button class="cute-btn btn-1" onclick="showPhoto(0)">Memory 1</button>
+        <button class="cute-btn btn-2" onclick="showPhoto(1)">Memory 2</button>
+        <button class="cute-btn btn-3" onclick="showPhoto(2)">Memory 3</button>
+        <button class="cute-btn btn-4" onclick="showPhoto(3)">Memory 4</button>
     </div>
+
+    <script>
+        const memories = [
+            'https://ibb.co/S4C3grM',
+            'https://ibb.co/27dBbqD',
+            'https://ibb.co/0Vt1TnK',
+            'https://ibb.co/7tYXgpT4'
+        ];
+
+        function showPhoto(index) {
+            const photoElement = document.getElementById('photo');
+            photoElement.style.display = 'none';
+            
+            setTimeout(() => {
+                photoElement.src = memories[index];
+                photoElement.style.display = 'block';
+            }, 100);
+        }
+    </script>
 
 </body>
 </html>
