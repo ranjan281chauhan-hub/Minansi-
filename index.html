@@ -92,6 +92,12 @@
         .btn-3 { background: #ff4d6d; color: white; border-radius: 20px 0 20px 0; } /* Inverse leaf */
         .btn-4 { background: #c9184a; color: white; border-radius: 10px; border: 2px solid white; } /* Framed */
 
+        .error-message {
+            color: #ff4d6d;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -111,26 +117,37 @@
         <button class="cute-btn btn-4" onclick="showPhoto(3)">Memory 4</button>
     </div>
 
+    <p id="error" class="error-message"></p>
+
     <script>
         const memories = [
-            'https://i.ibb.co/S4C3grM/image.jpg',
-            'https://i.ibb.co/27dBbqD/image.jpg',
-            'https://i.ibb.co/0Vt1TnK/image.jpg',
-            'https://i.ibb.co/7tYXgpT4/image.jpg'
+            'https://i.ibb.co/S4C3grM.jpg',
+            'https://i.ibb.co/27dBbqD.jpg',
+            'https://i.ibb.co/0Vt1TnK.jpg',
+            'https://i.ibb.co/7tYXgpT4.jpg'
         ];
 
         function showPhoto(index) {
             const photoElement = document.getElementById('photo');
+            const errorElement = document.getElementById('error');
+            
             photoElement.style.display = 'none';
+            errorElement.textContent = '';
             
             setTimeout(() => {
-                photoElement.src = memories[index];
-                photoElement.onload = function() {
+                const img = new Image();
+                
+                img.onload = function() {
+                    photoElement.src = memories[index];
                     photoElement.style.display = 'block';
                 };
-                photoElement.onerror = function() {
-                    console.log('Image failed to load. Check the URL.');
+                
+                img.onerror = function() {
+                    errorElement.textContent = '❌ Image failed to load. Please check the image URL.';
+                    console.log('Failed to load:', memories[index]);
                 };
+                
+                img.src = memories[index];
             }, 100);
         }
     </script>
