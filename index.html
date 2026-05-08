@@ -76,6 +76,11 @@
             box-shadow: 0 4px 0px rgba(0,0,0,0.1);
         }
 
+        .cute-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(255, 77, 109, 0.2);
+        }
+
         .cute-btn:active {
             transform: translateY(4px);
             box-shadow: none;
@@ -86,7 +91,6 @@
         .btn-2 { background: #ff85a1; color: white; border-radius: 0 20px 0 20px; } /* Leaf shape */
         .btn-3 { background: #ff4d6d; color: white; border-radius: 20px 0 20px 0; } /* Inverse leaf */
         .btn-4 { background: #c9184a; color: white; border-radius: 10px; border: 2px solid white; } /* Framed */
-        .btn-5 { background: #ffccd5; color: #ff4d6d; border-radius: 50% 50% 10% 10%; } /* Semi-circle */
 
     </style>
 </head>
@@ -109,10 +113,10 @@
 
     <script>
         const memories = [
-            'https://ibb.co/S4C3grM',
-            'https://ibb.co/27dBbqD',
-            'https://ibb.co/0Vt1TnK',
-            'https://ibb.co/7tYXgpT4'
+            'https://i.ibb.co/S4C3grM/image.jpg',
+            'https://i.ibb.co/27dBbqD/image.jpg',
+            'https://i.ibb.co/0Vt1TnK/image.jpg',
+            'https://i.ibb.co/7tYXgpT4/image.jpg'
         ];
 
         function showPhoto(index) {
@@ -121,7 +125,12 @@
             
             setTimeout(() => {
                 photoElement.src = memories[index];
-                photoElement.style.display = 'block';
+                photoElement.onload = function() {
+                    photoElement.style.display = 'block';
+                };
+                photoElement.onerror = function() {
+                    console.log('Image failed to load. Check the URL.');
+                };
             }, 100);
         }
     </script>
